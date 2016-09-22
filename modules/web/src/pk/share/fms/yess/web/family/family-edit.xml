@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editCaption"
+        class="pk.share.fms.yess.web.family.FamilyEdit"
+        datasource="familyDs"
+        messagesPack="pk.share.fms.yess.web.family">
+    <dsContext>
+        <datasource id="familyDs"
+                    class="pk.share.fms.yess.entity.Family"
+                    view="family-view"/>
+        <collectionDatasource id="citiesDs"
+                              class="pk.share.fms.yess.entity.City"
+                              view="_local">
+            <query>
+                <![CDATA[select e from yess$City e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <actions>
+        <action id="save"
+                caption="mainMsg://actions.Ok"
+                icon="icons/ok.png"
+                invoke="save"
+                shortcut="CTRL-ENTER"/>
+        <action id="cancel"
+                caption="mainMsg://actions.Cancel"
+                icon="icons/cancel.png"
+                invoke="cancel"/>
+    </actions>
+    <layout spacing="true">
+        <grid margin="true"
+              spacing="true">
+            <columns count="4"/>
+            <rows>
+                <row>
+                    <label align="MIDDLE_LEFT"
+                           value="Family Head Name"/>
+                    <textField id="familyHeadName"
+                               datasource="familyDs"
+                               property="familyHeadName"/>
+                    <label align="MIDDLE_LEFT"
+                           value="Family Head CNIC"/>
+                    <maskedField id="familyHeadCNIC"
+                                 datasource="familyDs"
+                                 mask="#####-#######-#"
+                                 property="familyIdentityCardNumber"/>
+                </row>
+                <row>
+                    <label align="MIDDLE_LEFT"
+                           value="Family Head DOB"/>
+                    <dateField id="familyHeadBirthDate"
+                               datasource="familyDs"
+                               name="familyHeadBirthDate"
+                               property="familyHeadBirthDate"/>
+                    <label align="MIDDLE_LEFT"
+                           value="Family Head Deceased Date"/>
+                    <dateField id="familyHeadDeathDate"
+                               datasource="familyDs"
+                               name="familyHeadDeathDate"
+                               property="familyHeadDeathDate"/>
+                </row>
+                <row>
+                    <label/>
+                    <label/>
+                    <label value="Death In Incident"/>
+                    <pickerField datasource="familyDs"
+                                 property="deathInIncident"
+                                 width="250px"/>
+                </row>
+                <row>
+                    <label align="MIDDLE_LEFT"
+                           value="Address"/>
+                    <textField colspan="2"
+                               datasource="familyDs"
+                               property="streeAddress"
+                               width="300px"/>
+                    <checkBox caption="Syed?"
+                              datasource="familyDs"
+                              property="isSyed"/>
+                </row>
+                <row>
+                    <label align="MIDDLE_LEFT"
+                           value="City"/>
+                    <lookupPickerField id="incidentCity"
+                                       datasource="familyDs"
+                                       optionsDatasource="citiesDs"
+                                       property="city"/>
+                    <label align="MIDDLE_LEFT"
+                           value="Postal Code"/>
+                    <maskedField id="postalCode"
+                                 datasource="familyDs"
+                                 mask="#####"
+                                 property="postalCode"/>
+                </row>
+                <row>
+                    <label value="Cell Phone"/>
+                    <maskedField id="cellPhone"
+                                 datasource="familyDs"
+                                 mask="####-###-####"
+                                 property="contactPhone"/>
+                    <textArea id="additionalContacts"
+                              caption="Additional Details:"
+                              colspan="2"
+                              height="100px"
+                              width="330px"/>
+                </row>
+                <row>
+                    <label/>
+                    <frame id="windowActions"
+                           align="TOP_CENTER"
+                           colspan="2"
+                           screen="editWindowActions"/>
+                </row>
+            </rows>
+        </grid>
+    </layout>
+</window>

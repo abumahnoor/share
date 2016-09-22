@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editCaption"
+        class="pk.share.fms.yess.web.sponsored.SponsoredEdit"
+        datasource="sponsoredDs"
+        messagesPack="pk.share.fms.yess.web.sponsored">
+    <dsContext>
+        <datasource id="sponsoredDs"
+                    class="pk.share.fms.yess.entity.Sponsored"
+                    view="_local"/>
+        <collectionDatasource id="citiesDs"
+                              class="pk.share.fms.yess.entity.City"
+                              view="city-view">
+            <query>
+                <![CDATA[select e from yess$City e]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="familiesDs"
+                              class="pk.share.fms.yess.entity.Family"
+                              view="_minimal">
+            <query>
+                <![CDATA[select e from yess$Family e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout spacing="true">
+        <grid margin="true"
+              spacing="true">
+            <columns count="4"/>
+            <rows>
+                <row>
+                    <label value="First Name"/>
+                    <textField id="firstName"
+                               datasource="sponsoredDs"
+                               property="firstName"/>
+                    <label value="Last Name"/>
+                    <textField id="lastName"
+                               datasource="sponsoredDs"
+                               property="lastName"/>
+                </row>
+                <row>
+                    <label value="Birth Date"/>
+                    <dateField id="birthDate"
+                               datasource="sponsoredDs"
+                               property="birthDate"/>
+                    <label value="Gender"/>
+                    <optionsGroup id="gender"
+                                  datasource="sponsoredDs"
+                                  property="gender"/>
+                </row>
+                <row>
+                    <label value="Syed ?"/>
+                    <checkBox id="isSyed"
+                              datasource="sponsoredDs"
+                              property="isSyed"/>
+                    <label value="Active ?"/>
+                    <checkBox id="isActive"
+                              datasource="sponsoredDs"
+                              property="isActive"/>
+                </row>
+                <row>
+                    <label value="Address"/>
+                    <textField id="addressLine1"
+                               datasource="sponsoredDs"
+                               property="addressLine1"/>
+                    <label value="City"/>
+                    <lookupPickerField id="city"
+                                       datasource="sponsoredDs"
+                                       optionsDatasource="citiesDs"
+                                       property="city"/>
+                </row>
+                <row>
+                    <label value="Postal Code"/>
+                    <textField id="postalCode"
+                               datasource="sponsoredDs"
+                               property="postalCode"/>
+                    <label value="Family "/>
+                    <lookupPickerField id="family"
+                                       datasource="sponsoredDs"
+                                       optionsDatasource="familiesDs"
+                                       property="family"/>
+                </row>
+                <row>
+                    <label value="Contact #"/>
+                    <textField id="contactPhone"
+                               datasource="sponsoredDs"
+                               property="contactPhone"/>
+                    <textArea id="additionalContacts"
+                              caption="Additional Contact Details"
+                              colspan="2"
+                              datasource="sponsoredDs"
+                              property="additionalContacts"
+                              width="309px"/>
+                </row>
+                <row>
+                    <label/>
+                    <frame id="windowActions"
+                           align="TOP_CENTER"
+                           colspan="2"
+                           screen="editWindowActions"/>
+                </row>
+            </rows>
+        </grid>
+    </layout>
+</window>

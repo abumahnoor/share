@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<views xmlns="http://schemas.haulmont.com/cuba/view.xsd">
+    <view class="pk.share.fms.yess.entity.City"
+          extends="_local"
+          name="city-edit-view">
+        <property name="region"
+                  view="_minimal">
+            <property name="regionName"/>
+        </property>
+    </view>
+    <view class="pk.share.fms.yess.entity.Incident"
+          extends="_local"
+          name="incident-browser-view">
+        <property name="incidentRegion"
+                  view="_minimal"/>
+        <property name="incidentCity"
+                  view="_minimal">
+        </property>
+    </view>
+    <view class="pk.share.fms.yess.entity.Family"
+          extends="_local"
+          name="family-view">
+        <property name="city"
+                  view="_minimal">
+            <property name="region"
+                      view="_minimal"/>
+        </property>
+        <property name="deathInIncident"
+                  view="_minimal"/>
+    </view>
+    <view class="pk.share.fms.yess.entity.City"
+          extends="city-edit-view"
+          name="city-view"/>
+</views>

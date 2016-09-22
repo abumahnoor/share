@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://editCaption"
+        class="pk.share.fms.yess.web.region.RegionEdit"
+        datasource="regionDs"
+        focusComponent="fieldGroup"
+        messagesPack="pk.share.fms.yess.web.region">
+    <dsContext>
+        <datasource id="regionDs"
+                    class="pk.share.fms.yess.entity.Region"
+                    view="_local"/>
+    </dsContext>
+    <layout expand="windowActions"
+            spacing="true">
+        <fieldGroup id="fieldGroup"
+                    datasource="regionDs">
+            <column width="250px">
+                <field id="regionName"/>
+            </column>
+        </fieldGroup>
+        <frame id="windowActions"
+               screen="editWindowActions"/>
+    </layout>
+</window>

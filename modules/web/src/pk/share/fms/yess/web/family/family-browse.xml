@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="pk.share.fms.yess.web.family.FamilyBrowse"
+        focusComponent="familiesTable"
+        lookupComponent="familiesTable"
+        messagesPack="pk.share.fms.yess.web.family">
+    <dsContext>
+        <collectionDatasource id="familiesDs"
+                              class="pk.share.fms.yess.entity.Family"
+                              view="family-view">
+            <query>
+                <![CDATA[select e from yess$Family e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout expand="familiesTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="familiesTable"
+                datasource="familiesDs">
+            <properties include=".*"/>
+        </filter>
+        <table id="familiesTable"
+               width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="familyHeadName"/>
+                <column id="familyHeadBirthDate"/>
+                <column id="familyHeadDeathDate"/>
+                <column id="familyIdentityCardNumber"/>
+                <column id="isSyed"/>
+                <column id="streeAddress"/>
+                <column id="contactPhone"/>
+            </columns>
+            <rows datasource="familiesDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="familiesTable.create"/>
+                <button id="editBtn"
+                        action="familiesTable.edit"/>
+                <button id="removeBtn"
+                        action="familiesTable.remove"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>

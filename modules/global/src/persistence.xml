@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence"
+             version="2.0">
+    <persistence-unit name="yess"
+                      transaction-type="RESOURCE_LOCAL">
+        <class>pk.share.fms.yess.entity.Region</class>
+        <class>pk.share.fms.yess.entity.City</class>
+        <class>pk.share.fms.yess.entity.Incident</class>
+        <class>pk.share.fms.yess.entity.Family</class>
+        <class>pk.share.fms.yess.entity.Sponsored</class>
+        <class>pk.share.fms.yess.entity.SponsorshipRequest</class>
+        <class>pk.share.fms.yess.entity.Provider</class>
+        <class>pk.share.fms.yess.entity.Volunteer</class>
+    </persistence-unit>
+</persistence>

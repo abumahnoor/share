@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="pk.share.fms.yess.web.sponsored.SponsoredBrowse"
+        focusComponent="sponsoredsTable"
+        lookupComponent="sponsoredsTable"
+        messagesPack="pk.share.fms.yess.web.sponsored">
+    <dsContext>
+        <collectionDatasource id="sponsoredsDs"
+                              class="pk.share.fms.yess.entity.Sponsored"
+                              view="_local">
+            <query>
+                <![CDATA[select e from yess$Sponsored e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <layout expand="sponsoredsTable"
+            spacing="true">
+        <filter id="filter"
+                applyTo="sponsoredsTable"
+                datasource="sponsoredsDs">
+            <properties include=".*"/>
+        </filter>
+        <table id="sponsoredsTable"
+               width="100%">
+            <actions>
+                <action id="create"/>
+                <action id="edit"/>
+                <action id="remove"/>
+            </actions>
+            <columns>
+                <column id="firstName"/>
+                <column id="lastName"/>
+                <column id="gender"/>
+                <column id="birthDate"/>
+                <column id="isSyed"/>
+                <column id="addressLine1"/>
+                <column id="postalCode"/>
+                <column id="contactPhone"/>
+                <column id="additionalContacts"/>
+                <column id="isActive"/>
+            </columns>
+            <rows datasource="sponsoredsDs"/>
+            <rowsCount/>
+            <buttonsPanel id="buttonsPanel"
+                          alwaysVisible="true">
+                <button id="createBtn"
+                        action="sponsoredsTable.create"/>
+                <button id="editBtn"
+                        action="sponsoredsTable.edit"/>
+                <button id="removeBtn"
+                        action="sponsoredsTable.remove"/>
+            </buttonsPanel>
+        </table>
+    </layout>
+</window>

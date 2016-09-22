@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="pk.share.fms.yess.web.city.CityBrowse"
+        focusComponent="citiesTable"
+        lookupComponent="citiesTable"
+        messagesPack="pk.share.fms.yess.web.city">
+    <dsContext>
+        <datasource id="cityDs"
+                    class="pk.share.fms.yess.entity.City"
+                    view="city-edit-view"/>
+        <collectionDatasource id="citiesDs"
+                              class="pk.share.fms.yess.entity.City"
+                              view="city-edit-view">
+            <query>
+                <![CDATA[select e from yess$City e]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="regionsDs"
+                              class="pk.share.fms.yess.entity.Region"
+                              view="_local">
+            <query>
+                <![CDATA[select e from yess$Region e]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <actions>
+        <action id="save"
+                caption="mainMsg://actions.Ok"
+                icon="icons/ok.png"
+                invoke="save"
+                shortcut="CTRL-ENTER"/>
+        <action id="cancel"
+                caption="mainMsg://actions.Cancel"
+                icon="icons/cancel.png"
+                invoke="cancel"/>
+    </actions>
+    <layout height="100%">
+        <split id="split"
+               height="100%"
+               maxSplitPosition="50%"
+               minSplitPosition="50%"
+               orientation="vertical"
+               width="100%">
+            <vbox id="lookupBox"
+                  expand="citiesTable"
+                  height="100%"
+                  margin="false,true,false,false"
+                  spacing="true">
+                <filter id="filter"
+                        applyTo="citiesTable"
+                        datasource="citiesDs">
+                    <properties include=".*"/>
+                </filter>
+                <table id="citiesTable"
+                       width="100%">
+                    <actions>
+                        <action id="create"/>
+                        <action id="edit"/>
+                        <action id="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="cityName"/>
+                        <column id="region"/>
+                    </columns>
+                    <rows datasource="citiesDs"/>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="createBtn"
+                                action="citiesTable.create"/>
+                        <button id="editBtn"
+                                action="citiesTable.edit"/>
+                        <button id="removeBtn"
+                                action="citiesTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </vbox>
+            <vbox id="editBox"
+                  height="100%"
+                  margin="false,false,false,true"
+                  spacing="true">
+                <scrollBox height="90%"
+                           margin="true"
+                           scrollBars="both"
+                           spacing="true"
+                           width="90%">
+                    <hbox id="actionsPane"
+                          spacing="true"
+                          visible="false">
+                        <button id="saveBtn"
+                                action="save"/>
+                        <button id="cancelBtn"
+                                action="cancel"/>
+                    </hbox>
+                    <groupBox caption="City">
+                        <lookupPickerField caption="Region"
+                                           datasource="cityDs"
+                                           optionsDatasource="regionsDs"
+                                           property="region"/>
+                        <textField caption="City Name"
+                                   datasource="cityDs"
+                                   property="cityName"
+                                   width="70%"/>
+                    </groupBox>
+                </scrollBox>
+            </vbox>
+        </split>
+    </layout>
+</window>

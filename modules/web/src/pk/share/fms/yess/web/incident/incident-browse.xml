@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<window xmlns="http://schemas.haulmont.com/cuba/window.xsd"
+        caption="msg://browseCaption"
+        class="pk.share.fms.yess.web.incident.IncidentBrowse"
+        focusComponent="incidentsTable"
+        lookupComponent="incidentsTable"
+        messagesPack="pk.share.fms.yess.web.incident">
+    <dsContext>
+        <datasource id="incidentDs"
+                    class="pk.share.fms.yess.entity.Incident"
+                    view="incident-browser-view"/>
+        <collectionDatasource id="incidentsDs"
+                              class="pk.share.fms.yess.entity.Incident"
+                              view="incident-browser-view">
+            <query>
+                <![CDATA[select e from yess$Incident e]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="regionsDs"
+                              class="pk.share.fms.yess.entity.Region"
+                              view="_local">
+            <query>
+                <![CDATA[select e from yess$Region e]]>
+            </query>
+        </collectionDatasource>
+        <collectionDatasource id="citiesDs"
+                              class="pk.share.fms.yess.entity.City"
+                              view="_local">
+            <query>
+                <![CDATA[select e from yess$City e WHERE e.region.id = :ds$incidentDs.incidentRegion
+]]>
+            </query>
+        </collectionDatasource>
+    </dsContext>
+    <actions>
+        <action id="save"
+                caption="mainMsg://actions.Ok"
+                icon="icons/ok.png"
+                invoke="save"
+                shortcut="CTRL-ENTER"/>
+        <action id="cancel"
+                caption="mainMsg://actions.Cancel"
+                icon="icons/cancel.png"
+                invoke="cancel"/>
+    </actions>
+    <layout height="100%">
+        <split id="split"
+               height="100%"
+               maxSplitPosition="50%"
+               minSplitPosition="50%"
+               orientation="vertical"
+               width="100%">
+            <vbox id="lookupBox"
+                  expand="incidentsTable"
+                  height="100%"
+                  margin="false,true,false,false"
+                  spacing="true">
+                <filter id="filter"
+                        applyTo="incidentsTable"
+                        datasource="incidentsDs">
+                    <properties include=".*"/>
+                </filter>
+                <table id="incidentsTable"
+                       width="50%">
+                    <actions>
+                        <action id="create"/>
+                        <action id="edit"/>
+                        <action id="remove"/>
+                    </actions>
+                    <columns>
+                        <column id="incidentDate"/>
+                        <column id="incidentName"/>
+                        <column id="incidentRegion"/>
+                        <column id="incidentCity"/>
+                        <column id="incidentLocation"/>
+                    </columns>
+                    <rows datasource="incidentsDs"/>
+                    <rowsCount/>
+                    <buttonsPanel id="buttonsPanel"
+                                  alwaysVisible="true">
+                        <button id="createBtn"
+                                action="incidentsTable.create"/>
+                        <button id="editBtn"
+                                action="incidentsTable.edit"/>
+                        <button id="removeBtn"
+                                action="incidentsTable.remove"/>
+                    </buttonsPanel>
+                </table>
+            </vbox>
+            <vbox id="editBox"
+                  height="100%"
+                  margin="false,false,false,true"
+                  spacing="true">
+                <scrollBox height="100%"
+                           margin="true"
+                           spacing="true"
+                           width="80%">
+                    <hbox id="actionsPane"
+                          height="10%"
+                          spacing="true"
+                          visible="false">
+                        <button id="saveBtn"
+                                action="save"/>
+                        <button id="cancelBtn"
+                                action="cancel"/>
+                    </hbox>
+                    <groupBox id="incidentEdit"
+                              caption="Incident"
+                              height="90%"
+                              width="70%">
+                        <dateField id="incidentDate"
+                                   caption="Incident Date"
+                                   datasource="incidentDs"
+                                   property="incidentDate"/>
+                        <textField id="incidentTitle"
+                                   caption="Title / Label "
+                                   datasource="incidentDs"
+                                   property="incidentTitle"
+                                   width="80%"/>
+                        <lookupPickerField id="incidentRegion"
+                                           caption="Region"
+                                           datasource="incidentDs"
+                                           optionsDatasource="regionsDs"
+                                           property="incidentRegion"/>
+                        <lookupPickerField id="incidentCity"
+                                           caption="City"
+                                           datasource="incidentDs"
+                                           optionsDatasource="citiesDs"
+                                           property="incidentCity"/>
+                        <textField id="incidentLocation"
+                                   caption="Location"
+                                   datasource="incidentDs"
+                                   property="incidentLocation"/>
+                        <richTextArea id="description"
+                                      caption="Description"
+                                      datasource="incidentDs"
+                                      property="description"
+                                      rows="5"/>
+                    </groupBox>
+                </scrollBox>
+            </vbox>
+        </split>
+    </layout>
+</window>

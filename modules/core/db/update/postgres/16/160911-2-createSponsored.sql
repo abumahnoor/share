@@ -1,0 +1,4 @@
+alter table YESS_SPONSORED add constraint FK_YESS_SPONSORED_CITY_ID foreign key (CITY_ID) references YESS_CITY(ID);
+alter table YESS_SPONSORED add constraint FK_YESS_SPONSORED_FAMILY_ID foreign key (FAMILY_ID) references YESS_FAMILY(ID);
+create index IDX_YESS_SPONSORED_CITY on YESS_SPONSORED (CITY_ID);
+create index IDX_YESS_SPONSORED_FAMILY on YESS_SPONSORED (FAMILY_ID);

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<studio>
+    <dbScripts>
+        <excludes>
+            <postgres>
+                <item name="160903-2-updateRegion07.sql">
+                    <![CDATA[create unique index IDX_YESS_REGION_UNIQ_REGION_NAME on YESS_REGION (REGION_NAME) ;]]>
+                </item>
+            </postgres>
+        </excludes>
+    </dbScripts>
+</studio>
